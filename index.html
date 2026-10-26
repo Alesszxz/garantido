@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajuste de Ganhos | Calculadora de Valor Fixo</title>
+  <meta name="description" content="Envie o print dos seus ganhos semanais, informe o valor fixo e calcule automaticamente o valor líquido e bruto a ser lançado.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">R$</span>
+      <div>
+        <h1>Ajuste de Ganhos</h1>
+        <p>Envie o print → informe o valor fixo → pronto</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- PASSO 1 -->
+    <section class="card" id="step-upload">
+      <div class="card-head">
+        <span class="step">1</span>
+        <h2>Print do gráfico</h2>
+        <span class="ocr-status loading" id="ocr-status">Carregando leitor...</span>
+      </div>
+
+      <label class="dropzone" id="dropzone" for="file-input">
+        <input type="file" id="file-input" accept="image/*" hidden>
+        <div class="dz-content" id="dz-content">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <strong>Toque para escolher o print</strong>
+          <span>ou arraste a imagem aqui • ou cole com <kbd>Ctrl</kbd>+<kbd>V</kbd></span>
+        </div>
+        <img id="preview" alt="Pré-visualização do print" hidden>
+      </label>
+
+      <div class="progress" id="progress" hidden>
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+        <span id="progress-text">Lendo imagem...</span>
+      </div>
+
+      <div class="ocr-msg" id="ocr-msg" hidden></div>
+    </section>
+
+    <!-- PASSO 2 -->
+    <section class="card" id="step-fixed">
+      <div class="card-head">
+        <span class="step">2</span>
+        <h2>Valor fixo diário</h2>
+      </div>
+      <div class="fixed-row">
+        <div class="money-input">
+          <span>R$</span>
+          <input type="number" id="fixed-value" inputmode="decimal" step="0.01" min="0" value="120">
+        </div>
+        <div class="formula">
+          <div><b>Líquido</b> = Fixo − Ganho do dia</div>
+          <div><b>Bruto</b> = Líquido ÷ 0,8</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASSO 3 -->
+    <section class="card" id="step-result">
+      <div class="card-head">
+        <span class="step">3</span>
+        <h2>Resultado</h2>
+        <button class="btn-ghost" id="btn-clear" type="button">Limpar</button>
+      </div>
+      <p class="hint">Confira os valores lidos do print. Você pode corrigir qualquer valor direto na tabela. Dias em branco são ignorados.</p>
+
+      <div class="table-wrap">
+        <table id="result-table">
+          <thead>
+            <tr>
+              <th>Dia</th>
+              <th>Ganho (X)</th>
+              <th>Líquido (Y)</th>
+              <th>Bruto (Z)</th>
+            </tr>
+          </thead>
+          <tbody id="result-body"></tbody>
+        </table>
+      </div>
+
+      <div class="totals">
+        <div class="total-box">
+          <span>Dias a ajustar</span>
+          <strong id="t-days">0</strong>
+        </div>
+        <div class="total-box">
+          <span>Total líquido</span>
+          <strong id="t-net">R$ 0,00</strong>
+        </div>
+        <div class="total-box highlight">
+          <span>Total bruto a lançar</span>
+          <strong id="t-gross">R$ 0,00</strong>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="btn-copy" type="button">Copiar resultado</button>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="app.js?v=3"></script>
+</body>
+</html>
