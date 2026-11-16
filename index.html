@@ -7,7 +7,7 @@
   <meta name="description" content="Envie o print dos seus ganhos semanais, informe o valor fixo e calcule automaticamente o valor líquido e bruto a ser lançado.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <div class="bg-glow"></div>
@@ -105,13 +105,79 @@
         </div>
       </div>
 
-      <button class="btn-primary" id="btn-copy" type="button">Copiar resultado</button>
+      <button class="btn-primary" id="btn-copy" type="button">Copiar resumo em texto</button>
+    </section>
+
+    <!-- PASSO 4 -->
+    <section class="card" id="step-auto">
+      <div class="card-head">
+        <span class="step">4</span>
+        <h2>Automação do Painel (iBoltt)</h2>
+      </div>
+      <p class="hint">Configure os dados do lançamento avulso e a data da Segunda-feira da semana para criar os lançamentos (sempre pelo valor <b>Bruto</b>) e já ajustar as datas automaticamente.</p>
+
+      <div class="auto-grid">
+        <label class="field">
+          <span>ID Empresa (<code>id_empresa</code>)</span>
+          <input type="text" id="id-empresa" value="3307" placeholder="3307" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>ID Motorista (<code>driver_id</code>)</span>
+          <input type="text" id="driver-id" placeholder="Ex: 61500" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Data da Segunda-feira</span>
+          <input type="date" id="start-date">
+        </label>
+        <label class="field">
+          <span>Assunto (<code>subject</code> - opcional)</span>
+          <input type="text" id="subject" placeholder="Opcional" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="auto-preview" id="auto-preview">
+        <span class="dash">Preencha os ganhos e a data da Segunda-feira para ver os lançamentos que serão gerados.</span>
+      </div>
+
+      <div class="auto-actions">
+        <button class="btn-primary" id="btn-copy-auto" type="button">⚡ 1. Copiar Pacote de Lançamento</button>
+        <button class="btn-secondary" id="btn-copy-script" type="button">📋 Copiar Script Direto (Console)</button>
+      </div>
+
+      <div class="bookmarklet-box">
+        <div class="bm-info">
+          <strong>2. Favorito Automático (instale só 1 vez):</strong>
+          <span>Arraste o botão verde ao lado para a sua <b>Barra de Favoritos</b>. Depois, com o pacote copiado, basta clicar nele na aba do painel!</span>
+        </div>
+        <a class="bm-link" id="bm-link" href="#" onclick="event.preventDefault(); alert('Arraste este botão para a sua Barra de Favoritos do navegador!');">🚀 Lançar Garantido</a>
+      </div>
+    </section>
+
+    <!-- PASSO 5 -->
+    <section class="card" id="step-diarias">
+      <div class="card-head">
+        <span class="step">5</span>
+        <h2>Automação de Diárias (Dashboard → Agenda → Lançamento)</h2>
+      </div>
+      <p class="hint">
+        Use este favorito direto na tela do <b>Dashboard</b> (<code>index_cocob_sp_market.php</code> ou Osasco). Ele lê automaticamente os prestadores do modal <b>"Prestadores c/ Diárias no Dia"</b>, pesquisa cada ID no <code>extrato_agenda_garantidos.php</code> (SP Market <b>6172</b> ou Osasco <b>6398</b>), verifica se tem <b>1 ou 2 horários confirmados</b> e abre um painel na tela para você escolher/digitar o valor bruto (<code>87.50</code>, <code>112.50</code>, <code>137.50</code> ou outro) e lançar tudo de uma vez!
+      </p>
+
+      <div class="bookmarklet-box" style="margin-bottom: 12px;">
+        <div class="bm-info">
+          <strong>Favorito de Diárias do Dia (arraste para a Barra de Favoritos):</strong>
+          <span>Abra o Dashboard do Coco Bambu, clique neste favorito e confira a tabela cruzada com a Agenda de Garantidos antes de confirmar o lançamento!</span>
+        </div>
+        <a class="bm-link" id="bm-diarias-link" href="#" onclick="event.preventDefault(); alert('Arraste este botão para a sua Barra de Favoritos do navegador!');">⚡ Diárias do Dia</a>
+      </div>
+
+      <button class="btn-secondary" id="btn-copy-diarias-script" type="button">📋 Copiar Script de Diárias (para colar no Console F12 do Dashboard)</button>
     </section>
   </main>
 
   <div class="toast" id="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
